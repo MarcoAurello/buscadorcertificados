@@ -182,8 +182,8 @@
             results19.innerHTML = ""; // Limpa os resultados anteriores
             results21.innerHTML = ""; // Limpa os resultados anteriores
 
-            fetch(`https://www7.pe.senac.br/certificadocongresso/usuarios?nome=${formattedCPF}`)
-            // fetch(`/usuarios?nome=${formattedCPF}`)
+            // fetch(`https://www7.pe.senac.br/certificadocongresso/usuarios?nome=${formattedCPF}`)
+            fetch(`/usuarios?nome=${formattedCPF}`)
                 .then(response => response.json())
                 .then(data => {
                     // loading.style.display = "none"; // Esconde o indicador de carregamento
@@ -234,26 +234,37 @@
 
         function verificarExistenciaDaPagina(formattedCPF) {
     if (navigator.onLine) {
-        axios.head(`https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf`)
-        .then(response => {
-            if (response.status === 200) {
-                // A página existe (status 200 OK)
+        const request = new XMLHttpRequest()
+        request.open('GET', `https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf`)
+        request.addEventListener('load', function (){
+            if(request.status == 200 || request.status == 304) {
                 const userDiv = document.createElement("div");
                 userDiv.classList.add("user");
                 userDiv.innerHTML = `<a href="https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf" target="_blank">Certificado 2021</a>`;
                 results21.appendChild(userDiv);
-            } else if (response.status === 302 && response.headers.location === 'https://www6.pe.senac.br/evento/inscricao/') {
-                // O link foi redirecionado para https://www6.pe.senac.br/evento/inscricao/
-                alert('A página foi redirecionada para https://www6.pe.senac.br/evento/inscricao/.');
-            } else {
-                // Outro status de resposta
-                alert('A página não existe. HTTP error! status: ' + response.status);
             }
-        })
-        .catch(error => {
-            // Tratar erros de requisição
-            alert('Ocorreu um erro na requisição: ' + error.message);
-        });
+        }, false)
+        request.send()
+        // axios.get(`https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf`)
+        // .then(response => {
+        //     if (response.status === 304) {
+        //         // A página existe (status 200 OK)
+        //         const userDiv = document.createElement("div");
+        //         userDiv.classList.add("user");
+        //         userDiv.innerHTML = `<a href="https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf" target="_blank">Certificado 2021</a>`;
+        //         results21.appendChild(userDiv);
+        //     } else if (response.status === 302 && response.headers.location === 'https://www6.pe.senac.br/evento/inscricao/') {
+        //         // O link foi redirecionado para https://www6.pe.senac.br/evento/inscricao/
+        //         alert('A página foi redirecionada para https://www6.pe.senac.br/evento/inscricao/.');
+        //     } else {
+        //         // Outro status de resposta
+        //         alert('A página não existe. HTTP error! status: ' + response.status);
+        //     }
+        // })
+        // .catch(error => {
+        //     // Tratar erros de requisição
+        //     alert('Ocorreu um erro na requisição: ' + error.message);
+        // });
     } else {
         alert('Você está offline. Verifique sua conexão de rede.');
     }

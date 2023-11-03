@@ -110,7 +110,7 @@ app.get(``, (req, res) => {
     res.sendFile('certificado.pdf', { root: __dirname });
   });
 
-  app.get('/eventos/certificado/congresso2021/:formattedCPF.pdf', (req, res) => {
+  app.get('/evento/certificado/congresso2021/:formattedCPF.pdf', (req, res) => {
     // Simula uma resposta com status 200 OK
     res.status(200).send('Resposta com status 200 OK');
   });
