@@ -25,14 +25,25 @@ app.get('/', (req, res) => {
 });
 
 app.get('/usuarios', async (req, res) => {
-    const nome = req.query.nome;
-    console.log('Nome recebido no servidor: ' + nome);
-    const users = await searchUsers(nome);
-    generateCertificate(nome)
-  
-    res.json(users);
+  const nome = req.query.nome;
+  console.log('Nome recebido no servidor: ' + nome);
 
+  try {
+      const users = await searchUsers(nome);
+      res.json(users);
 
+      // Inicie a geração de certificado em segundo plano, para não bloquear o servidor
+      generateCertificate(nome)
+          .then(() => {
+              console.log('Certificado gerado com sucesso.');
+          })
+          .catch((error) => {
+              console.error('Erro ao gerar o certificado:', error);
+          });
+  } catch (error) {
+      console.error('Erro ao buscar os usuários:', error);
+      res.status(500).json({ error: 'Erro ao buscar os usuários' });
+  }
 });
 
 

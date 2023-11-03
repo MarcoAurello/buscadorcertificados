@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca de Usuários</title>
+    <title>Certificado</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
@@ -218,7 +218,20 @@
                         loadingOverlay.style.display = "none";
                     }
 
-                    function verificarExistenciaDaPagina(formattedCPF) {
+                 
+
+                    results.classList.remove("hidden"); // Mostra o elemento de resultados
+
+                })
+                .catch(error => {
+                    console.error(error);
+                    loading.style.display = "none"; // Certifique-se de esconder o indicador em caso de erro
+                    loading2.style.display = "none";
+                    loadingOverlay.style.display = "none";
+                });
+        }
+
+        function verificarExistenciaDaPagina(formattedCPF) {
                         if (navigator.onLine) {
                             fetch(`https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf` , { mode: 'no-cors' })
                                 .then(response => {
@@ -244,17 +257,6 @@
                             alert('Você está offline. Verifique sua conexão de rede.');
                         }
                     }
-
-                    results.classList.remove("hidden"); // Mostra o elemento de resultados
-
-                })
-                .catch(error => {
-                    console.error(error);
-                    loading.style.display = "none"; // Certifique-se de esconder o indicador em caso de erro
-                    loading2.style.display = "none";
-                    loadingOverlay.style.display = "none";
-                });
-        }
 
         // Adicione uma função para limpar os resultados
         function clearResults() {
