@@ -1,0 +1,27 @@
+{
+  "name": "certificadoscongresso",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6",
+    "mssql": "^10.0.1",
+    "pdf2pic": "^3.0.3",
+    "puppeteer": "^21.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcoAurello/buscadorcertificadoscongresso.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MarcoAurello/buscadorcertificadoscongresso/issues"
+  },
+  "homepage": "https://github.com/MarcoAurello/buscadorcertificadoscongresso#readme",
+  "description": ""
+}

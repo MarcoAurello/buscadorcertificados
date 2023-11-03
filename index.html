@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de Usuários</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+        #loading {
+            display: none;
+            margin: 20px auto;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #007BFF;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
+        }
+
+        #loading2 {
+            display: none;
+            margin: 20px auto;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #007BFF;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+        }
+
+        #searchInput {
+            width: 80%;
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px solid#007BFF;
+            border-radius: 5px;
+            background-color: beige;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+
+            border-radius: 5px;
+            padding: 20px;
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+
+        #results19 {
+
+            border-radius: 5px;
+            padding: 20px;
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+
+        #results21 {
+
+            border-radius: 5px;
+            padding: 20px;
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+
+        .user {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Buscador de Certificados <br>Congresso Internacional de Tecnologia na Educação</h1>
+
+        <a href="https://intranet.pe.senac.br/dr/congresso/certificadoanosanteriores.aspx">
+            <button>Certificados 2014 a 2018</button>
+        </a>
+    </div>
+    <hr>
+
+
+    <input type="text" id="searchInput" style="width: 200px;" placeholder="Digite um CPF">
+    <button onclick="searchUsers()">certificados 2019 a 2023</button><br>
+
+
+
+
+
+    <div id="overlay" class="hidden">
+        <div id="loading-overlay">
+            <div id="loading"></div>
+        </div>
+    </div>
+
+    <div id="results" class="hidden">
+        <div id="loading"></div>
+    </div>
+
+    <div id="results21" class="hidden">
+        <div id="loading"></div>
+    </div>
+
+
+    <div id="results19" class="hidden">
+        <div id="loading2"></div>
+    </div>
+
+
+    <script>
+        // Adicione uma variável para controlar os resultados
+        let currentResults = [];
+
+        function searchUsers() {
+            const searchInput = document.getElementById("searchInput");
+            const formattedCPF = searchInput.value.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
+
+            if (formattedCPF.length !== 11) {
+                alert("CPF deve ter 11 dígitos.");
+                return;
+            }
+
+            const overlay = document.getElementById("overlay");
+            const loading = document.getElementById("loading");
+            const loadingOverlay = document.getElementById("loading-overlay");
+            const loading2 = document.getElementById("loading2");
+
+            const results = document.getElementById("results");
+            const results19 = document.getElementById("results19");
+            const results21 = document.getElementById("results21");
+
+            overlay.classList.remove("hidden"); // Mostra o overlay para bloquear a tela
+            loading.style.display = "block"; // Mostra o indicador de carregamento
+            loadingOverlay.style.display = "block";
+
+
+            loading.style.display = "block"; // Mostra o indicador de carregamento
+            loading2.style.display = "block"; // Mostra o indicador de carregamento
+
+            results.innerHTML = ""; // Limpa os resultados anteriores
+            results19.innerHTML = ""; // Limpa os resultados anteriores
+            results21.innerHTML = ""; // Limpa os resultados anteriores
+
+            fetch(`/usuarios?nome=${formattedCPF}`)
+                .then(response => response.json())
+                .then(data => {
+                    // loading.style.display = "none"; // Esconde o indicador de carregamento
+                    // loadingOverlay.style.display = "none"
+
+
+                    currentResults = data; // Armazena os resultados atuais
+
+                    if (data.length === 0) {
+                        results.innerHTML = "Certificado 2022 e 2023 não encontrado ...";
+                        setTimeout(createAndAppendUserDiv, 5000);
+                        verificarExistenciaDaPagina(formattedCPF);
+
+
+                    } else {
+                        data.forEach(user => {
+                            const userDiv = document.createElement("div");
+                            userDiv.classList.add("user");
+                            userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo}" target='_blank'>Certificado ${user.createdAt.substring(0, 4)} - ${user.nome}</a>`;
+                            // userDiv.innerHTML = `<a href="certificado.png" target='_blank'>Certificado ${'2019'} - ${user.nome}</a>`;
+                            results.appendChild(userDiv);
+                        });
+                        setTimeout(createAndAppendUserDiv, 10000);
+                        verificarExistenciaDaPagina(formattedCPF);
+                    }
+
+                    function createAndAppendUserDiv() {
+                        const userDiv = document.createElement("div");
+                        userDiv.classList.add("user");
+                        userDiv.innerHTML = `<a href="certificado.pdf" target="_blank">Certificado ${'2019'}</a>`;
+                        results19.appendChild(userDiv);
+                        loading2.style.display = "none"; // Esconde o indicador de carregamento
+                        loadingOverlay.style.display = "none";
+                    }
+
+                    function verificarExistenciaDaPagina(formattedCPF) {
+                        if (navigator.onLine) {
+                            fetch(`https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf` , { mode: 'no-cors' })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        alert('Ocorreu um erro na requisição: HTTP error! status: ' + response.status);
+                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                    }
+                                    return response;
+                                })
+                                .then(response => {
+                                    alert('Status da resposta: ' + response.status);
+                                    // A página existe (status 200 OK)
+                                    const userDiv = document.createElement("div");
+                                    userDiv.classList.add("user");
+                                    userDiv.innerHTML = `<a href="https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf" target="_blank">Certificado 2021</a>`;
+                                    results21.appendChild(userDiv);
+                                })
+                                .catch(error => {
+                                    // Tratar erros de requisição
+                                    alert('Ocorreu um erro na requisição: ' + error.message);
+                                });
+                        } else {
+                            alert('Você está offline. Verifique sua conexão de rede.');
+                        }
+                    }
+
+                    results.classList.remove("hidden"); // Mostra o elemento de resultados
+
+                })
+                .catch(error => {
+                    console.error(error);
+                    loading.style.display = "none"; // Certifique-se de esconder o indicador em caso de erro
+                    loading2.style.display = "none";
+                    loadingOverlay.style.display = "none";
+                });
+        }
+
+        // Adicione uma função para limpar os resultados
+        function clearResults() {
+            const results = document.getElementById("results");
+            results.innerHTML = "";
+            results.classList.add("hidden");
+            const results19 = document.getElementById("results19");
+            results19.innerHTML = "";
+            results19.classList.add("hidden");
+        }
+    </script>
+</body>
+
+</html>
