@@ -9,7 +9,7 @@ const pdf2pic = require('pdf2pic'); // Adicione esta linha
 const config = {
     user: 'sa',
     password: 'local',
-    server: 'SQLSERVER',
+    server: '10.9.8.74',
     database: 'congressoweb',
     options: {
         encrypt: true, // Isso permite a conexão segura
