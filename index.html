@@ -235,7 +235,7 @@
                         if (navigator.onLine) {
                             fetch(`https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf` , { mode: 'no-cors' })
                                 .then(response => {
-                                    if (!response.ok) {
+                                    if (response.status != 200) {
                                         alert('Ocorreu um erro na requisição: HTTP error! status: ' + response.status);
                                         throw new Error(`HTTP error! status: ${response.status}`);
                                     }
