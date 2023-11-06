@@ -33,7 +33,7 @@ app.get('/usuarios', async (req, res) => {
       res.json(users);
 
       // Inicie a geração de certificado em segundo plano, para não bloquear o servidor
-      generateCertificate(nome)
+      // generateCertificate(nome)
           .then(() => {
               console.log('Certificado gerado com sucesso.');
           })
