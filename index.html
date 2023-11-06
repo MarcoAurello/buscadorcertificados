@@ -114,15 +114,23 @@
     <div>
         <h1>Buscador de Certificados <br>Congresso Internacional de Tecnologia na Educação</h1>
 
-        <a href="https://intranet.pe.senac.br/dr/congresso/certificadoanosanteriores.aspx">
-            <button>Certificados antigos: 2014 a 2018</button>
+        <a href="https://intranet.pe.senac.br/dr/congresso/certificadoanosanteriores.aspx" target="_blank">
+            <button>Certificados 2014 a 2018</button>
+        </a>
+    </div>
+    <hr>
+    <div>
+
+
+        <a href="https://intranet.pe.senac.br/dr/certificadocongresso/" target="_blank">
+            <button>Certificados 2019</button>
         </a>
     </div>
     <hr>
 
 
     <input type="text" id="searchInput" style="width: 200px;" placeholder="Digite um CPF">
-    <button onclick="searchUsers()">certificados  2019 a 2023</button><br>
+    <button onclick="searchUsers()">certificados  2021 a 2023</button><br>
 
 
 
@@ -224,14 +232,7 @@
                         verificarExistenciaDaPagina(formattedCPF);
                     }
 
-                    function createAndAppendUserDiv() {
-                        const userDiv = document.createElement("div");
-                        userDiv.classList.add("user");
-                        userDiv.innerHTML = `<a href="certificado.pdf" target="_blank">Certificado ${'2019'}</a>`;
-                        results19.appendChild(userDiv);
-                        loading2.style.display = "none"; // Esconde o indicador de carregamento
-                        loadingOverlay.style.display = "none";
-                    }
+                   
 
 
 
