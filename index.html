@@ -130,7 +130,7 @@
 
 
     <input type="text" id="searchInput" style="width: 200px;" placeholder="Digite um CPF">
-    <button onclick="searchUsers()">certificados  2021 a 2023</button><br>
+    <button onclick="searchUsers()">certificados 2021 a 2023</button><br>
 
 
 
@@ -186,7 +186,7 @@
             results21.innerHTML = ""; // Limpa os resultados anteriores
 
             fetch(`https://www7.pe.senac.br/certificadocongresso/usuarios?nome=${formattedCPF}`)
-            // fetch(`/usuarios?nome=${formattedCPF}`)
+                // fetch(`/usuarios?nome=${formattedCPF}`)
                 .then(response => response.json())
                 .then(data => {
                     // loading.style.display = "none"; // Esconde o indicador de carregamento
@@ -204,26 +204,35 @@
 
 
                     } else {
-                     
-                        data.forEach((user, index) => {
+
+                        // Encontre o usuário com a data de criação mais antiga
+                        const usuarioMaisAntigo = data.reduce((usuarioAntigo, usuario) => {
+                            if (!usuarioAntigo || usuario.createdAt < usuarioAntigo.createdAt) {
+                                return usuario;
+                            } else {
+                                return usuarioAntigo;
+                            }
+                        }, null);
+
+                        // Verifique se encontrou um usuário com a data de criação mais antiga
+                        if (usuarioMaisAntigo) {
                             const userDiv = document.createElement("div");
                             userDiv.classList.add("user");
 
-                            // Verifica se o nome ainda não foi exibido e exibe-o apenas no primeiro elemento
-                         
-                                userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo}" target='_blank'>Certificados - ${user.createdAt.substring(0, 4)}</a>`;
-                         
-                          
+                            // Construa o URL com a data do usuário mais antigo
+                            userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${usuarioMaisAntigo.arquivo}" target='_blank'>Certificado - ${usuarioMaisAntigo.createdAt.substring(0, 4)}</a>`;
+
                             results.appendChild(userDiv);
-                        });
+                        }
+
                         // setTimeout(createAndAppendUserDiv, 10000);
                         verificarExistenciaDaPagina(formattedCPF);
-                       
+
                     }
 
-                   
 
-               
+
+
 
                     results.classList.remove("hidden"); // Mostra o elemento de resultados
 
