@@ -204,26 +204,19 @@
 
 
                     } else {
+                        // Ordene os dados com base na data de criação (mais novo para mais antigo)
+                        data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-                        // Encontre o usuário com a data de criação mais antiga
-                        const usuarioMaisAntigo = data.reduce((usuarioAntigo, usuario) => {
-                            if (!usuarioAntigo || usuario.createdAt < usuarioAntigo.createdAt) {
-                                return usuario;
-                            } else {
-                                return usuarioAntigo;
-                            }
-                        }, null);
-
-                        // Verifique se encontrou um usuário com a data de criação mais antiga
-                        if (usuarioMaisAntigo) {
+                        // Crie elementos HTML na ordem ordenada
+                        data.forEach((user) => {
                             const userDiv = document.createElement("div");
                             userDiv.classList.add("user");
 
-                            // Construa o URL com a data do usuário mais antigo
-                            userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${usuarioMaisAntigo.arquivo}" target='_blank'>Certificado - ${usuarioMaisAntigo.createdAt.substring(0, 4)}</a>`;
+                            // Construa o URL com base na data do usuário
+                            userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo}" target='_blank'>Certificado - ${user.createdAt.substring(0, 4)}</a>`;
 
                             results.appendChild(userDiv);
-                        }
+                        });
 
                         // setTimeout(createAndAppendUserDiv, 10000);
                         verificarExistenciaDaPagina(formattedCPF);
