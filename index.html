@@ -184,6 +184,7 @@
             results.innerHTML = ""; // Limpa os resultados anteriores
             results19.innerHTML = ""; // Limpa os resultados anteriores
             results21.innerHTML = ""; // Limpa os resultados anteriores
+            const usuario = ''
 
             fetch(`https://www7.pe.senac.br/certificadocongresso/usuarios?nome=${formattedCPF}`)
             // fetch(`/usuarios?nome=${formattedCPF}`)
@@ -195,7 +196,7 @@
 
                     currentResults = data; // Armazena os resultados atuais
                     let nomeExibido = false;
-                    const usuario = ''
+                  
 
                     if (data.length === 0) {
                         results.innerHTML = "Certificado 2022 e 2023 não encontrado ...";
@@ -212,7 +213,7 @@
                             // Verifica se o nome ainda não foi exibido e exibe-o apenas no primeiro elemento
                          
                                 userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo}" target='_blank'>Certificados de ${user.nome} - ${user.createdAt.substring(0, 4)}</a>`;
-                              usuario = user.nome
+                                usuario += user.nome ;
                           
                             results.appendChild(userDiv);
                         });
@@ -230,9 +231,9 @@
                 })
                 .catch(error => {
                     console.error(error);
-                    loading.style.display = "none"; // Certifique-se de esconder o indicador em caso de erro
-                    loading2.style.display = "none";
-                    loadingOverlay.style.display = "none";
+                    // loading.style.display = "none"; // Certifique-se de esconder o indicador em caso de erro
+                    // loading2.style.display = "none";
+                    // loadingOverlay.style.display = "none";
                 });
         }
 
