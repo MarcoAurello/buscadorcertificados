@@ -50,37 +50,37 @@ app.get('/usuarios', async (req, res) => {
 
   
 
-async function generateCertificate(cpf) {
-    const browser = await puppeteer.launch({ headless: 'new' });
-    const page = await browser.newPage();
+// async function generateCertificate(cpf) {
+//     const browser = await puppeteer.launch({ headless: 'new' });
+//     const page = await browser.newPage();
   
-    try {
-      // Abre a página da intranet do Senac
-      await page.goto('https://intranet.pe.senac.br/dr/certificadocongresso/');
+//     try {
+//       // Abre a página da intranet do Senac
+//       await page.goto('https://intranet.pe.senac.br/dr/certificadocongresso/');
   
-      // Insere o CPF no campo de entrada
-      await page.type('.login-input', cpf);
+//       // Insere o CPF no campo de entrada
+//       await page.type('.login-input', cpf);
   
-      // Clica no botão "Gerar"
-      await page.click('.login-button');
+//       // Clica no botão "Gerar"
+//       await page.click('.login-button');
   
-      // Aguarda um pouco para a página carregar
-      await page.waitForTimeout(5000);
+//       // Aguarda um pouco para a página carregar
+//       await page.waitForTimeout(5000);
   
-      // Salva a página como um arquivo PDF
-      const pdfPath = 'certificado.pdf';
-      await page.pdf({ path: pdfPath, format: 'A4', landscape: true });
+//       // Salva a página como um arquivo PDF
+//       const pdfPath = 'certificado.pdf';
+//       await page.pdf({ path: pdfPath, format: 'A4', landscape: true });
   
   
-      const result = await converter.convert(pdfPath);
+//       const result = await converter.convert(pdfPath);
   
-      console.log(`Certificado gerado e salvo como ${result[0].name}`);
-    } catch (error) {
-      console.error('Ocorreu um erro:', error);
-    } finally {
-      await browser.close();
-    }
-  }
+//       console.log(`Certificado gerado e salvo como ${result[0].name}`);
+//     } catch (error) {
+//       console.error('Ocorreu um erro:', error);
+//     } finally {
+//       await browser.close();
+//     }
+//   }
 
 async function searchUsers(nome) {
     try {
@@ -109,6 +109,10 @@ app.get(``, (req, res) => {
   app.get('/certificado.pdf', (req, res) => {
     res.sendFile('certificado.pdf', { root: __dirname });
   });
+
+  // app.get('/certificado2019', (req, res) => {
+  //   res.sendFile('certificado.pdf', { root: __dirname });
+  // });
 
   app.get('/evento/certificado/congresso2021/:formattedCPF.pdf', (req, res) => {
     // Simula uma resposta com status 200 OK
