@@ -34,12 +34,12 @@ app.get('/usuarios', async (req, res) => {
 
       // Inicie a geração de certificado em segundo plano, para não bloquear o servidor
       // generateCertificate(nome)
-          .then(() => {
-              console.log('Certificado gerado com sucesso.');
-          })
-          .catch((error) => {
-              console.error('Erro ao gerar o certificado:', error);
-          });
+          // .then(() => {
+          //     console.log('Certificado gerado com sucesso.');
+          // })
+          // .catch((error) => {
+          //     console.error('Erro ao gerar o certificado:', error);
+          // });
   } catch (error) {
       console.error('Erro ao buscar os usuários:', error);
       res.status(500).json({ error: 'Erro ao buscar os usuários' });
