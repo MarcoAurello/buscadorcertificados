@@ -80,14 +80,14 @@
 
             border-radius: 5px;
             padding: 20px;
-           
+
         }
 
         #results19 {
 
             border-radius: 5px;
             padding: 20px;
-           
+
             display: none;
         }
 
@@ -95,42 +95,42 @@
 
             border-radius: 5px;
             padding: 20px;
-         ;
+            ;
         }
 
         #results14 {
 
             border-radius: 5px;
             padding: 20px;
-        
+
         }
 
         #results15 {
 
             border-radius: 5px;
             padding: 20px;
-      
+
         }
 
         #results16 {
 
             border-radius: 5px;
             padding: 20px;
-      
+
         }
 
         #results17 {
 
             border-radius: 5px;
             padding: 20px;
-          
+
         }
 
         #results18 {
 
             border-radius: 5px;
             padding: 20px;
-    
+
         }
 
         .user {
@@ -275,11 +275,13 @@
                         } else {
                             const yearsProcessed = {};
 
+                            data.users.sort((a, b) => parseInt(b.createdAt.substring(0, 4)) - parseInt(a.createdAt.substring(0, 4)));
+
                             data.users.forEach(user => {
                                 const year = user.createdAt.substring(0, 4);
 
                                 // Verifica se o ano já foi processado
-                                if (!yearsProcessed[year]) {
+                                if (!yearsProcessed.includes(year)) {
                                     const userDiv = document.createElement("div");
                                     userDiv.classList.add("user");
 
@@ -287,11 +289,10 @@
 
                                     results.appendChild(userDiv);
 
-                                    // Marca o ano como processado
-                                    yearsProcessed[year] = true;
+                                    // Adiciona o ano ao array de anos processados
+                                    yearsProcessed.push(year);
                                 }
                             });
-
                             verificarExistenciaDaPagina(formattedCPF);
                         }
 
