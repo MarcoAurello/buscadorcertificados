@@ -239,7 +239,7 @@
                 results17.innerHTML = ""; // Limpa os resultados anteriores
                 results18.innerHTML = ""; // Limpa os resultados anteriores
 
-                fetch(`/usuarios?nome=${formattedCPF}`)
+                fetch(`/certificadocongresso/usuarios?nome=${formattedCPF}`)
                     .then(response => response.json())
                     .then(data => {
                         // loading.style.display = "none"; // Esconde o indicador de carregamento
@@ -262,7 +262,7 @@
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
                                 userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo}" target='_blank'>Certificado ${user.createdAt.substring(0, 4)}</a>`;
-                                // userDiv.innerHTML = `<a href="certificado.png" target='_blank'>Certificado ${'2019'} - ${user.nome}</a>`;
+                              
                                 results.appendChild(userDiv);
                             });
 
