@@ -81,7 +81,7 @@
             border-radius: 5px;
             padding: 20px;
             margin-bottom: 40px;
-           
+
 
         }
 
@@ -97,8 +97,8 @@
 
             border-radius: 5px;
             padding: 20px;
-          
-        
+
+
         }
 
         #results14 {
@@ -111,7 +111,7 @@
 
             border-radius: 5px;
             padding: 20px;
-      
+
         }
 
         #results16 {
@@ -124,14 +124,14 @@
 
             border-radius: 5px;
             padding: 20px;
-          
+
         }
 
         #results18 {
 
             border-radius: 5px;
             padding: 20px;
-    
+
         }
 
         .user {
@@ -209,9 +209,9 @@
 
 
 
-       
 
-       
+
+
 
         <script>
             // Adicione uma variável para controlar os resultados
@@ -285,7 +285,7 @@
                                 const year = user.createdAt.substring(0, 4);
 
                                 // Verifica se o ano já foi processado
-                                if (!yearsProcessed[year]) {
+                                if (!yearsProcessed.includes(year)) {
                                     const userDiv = document.createElement("div");
                                     userDiv.classList.add("user");
 
@@ -293,8 +293,13 @@
 
                                     results.appendChild(userDiv);
 
+                                    // Adiciona a margem entre os elementos, exceto para o último elemento
+                                    if (results.children.length > 1) {
+                                        userDiv.style.marginTop = "40px";
+                                    }
+
                                     // Marca o ano como processado
-                                    yearsProcessed[year] = true;
+                                    yearsProcessed.push(year);
                                 }
                             });
 
