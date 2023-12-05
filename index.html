@@ -116,6 +116,30 @@
             margin-right: 40px;
         }
 
+        #results16 {
+
+            border-radius: 5px;
+            padding: 20px;
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+
+        #results17 {
+
+            border-radius: 5px;
+            padding: 20px;
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+
+        #results18 {
+
+            border-radius: 5px;
+            padding: 20px;
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+
         .user {
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -123,15 +147,17 @@
             margin: 10px 0;
             background-color: #f9f9f9;
         }
+
         #a {
-            display: block; /* ou display: inline-block; ou display: inline; conforme necessário */
+            display: block;
+            /* ou display: inline-block; ou display: inline; conforme necessário */
         }
     </style>
 </head>
 
 <body>
     <div>
-       
+
         <h1>Buscador de Certificados <br>Congresso Internacional de Tecnologia na Educação Senac PE</h1>
         2014 a 2023
 
@@ -140,13 +166,13 @@
         </a>
     </div> -->
         <hr>
-        
-        <div id ='a'>
+
+        <div id='a'>
             <input type="text" id="searchInput" style="width: 200px;" placeholder="Digite um CPF">
-        <button onclick="searchUsers()">Digite o CPF</button>
+            <button onclick="searchUsers()">Digite o CPF</button>
 
         </div>
-                
+
         <br>
 
         <div id="overlay" class="hidden">
@@ -175,7 +201,7 @@
         <div id="results17" class="hidden">
 
         </div>
-        
+
         <div id="results16" class="hidden">
 
         </div>
@@ -203,8 +229,8 @@
                 }
 
                 if (formattedCPF) {
-            a.style.display = "none";
-        }
+                    a.style.display = "none";
+                }
 
                 const overlay = document.getElementById("overlay");
                 const loading = document.getElementById("loading");
@@ -246,7 +272,7 @@
                         // loadingOverlay.style.display = "none"
                         // createAndAppendUserDiv()
 
-                        
+
 
 
                         currentResults = data; // Armazena os resultados atuais
@@ -262,7 +288,7 @@
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
                                 userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo}" target='_blank'>Certificado ${user.createdAt.substring(0, 4)}</a>`;
-                              
+
                                 results.appendChild(userDiv);
                             });
 
@@ -276,20 +302,20 @@
 
 
                         } else {
-                       
+
 
                             data.usersAntigos.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
-                                if(user.arquivo != null){
+                                if (user.arquivo != null) {
                                     userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2014/${user.arquivo}" target='_blank'> Certificado 2014 </a>`;
 
                                 }
-                                
+
                                 results14.appendChild(userDiv);
                             });
                         }
-                       
+
 
                         if (data.usersAntigos15.length === 0) {
                             results15.innerHTML = " ";
@@ -302,11 +328,11 @@
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
 
-                                if(user.arquivo != null){
+                                if (user.arquivo != null) {
                                     userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2015/${user.arquivo}" target='_blank'> Certificado 2015</a>`;
-                                
+
                                 }
-                             
+
                                 results15.appendChild(userDiv);
                             });
 
@@ -323,9 +349,9 @@
                             data.usersAntigos16.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
-                                if(user.arquivo != null){
+                                if (user.arquivo != null) {
                                     userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2016/${user.arquivo}" target='_blank'> Certificado 2016</a>`;
-                                
+
                                 }
                                 results16.appendChild(userDiv);
                             });
@@ -343,9 +369,9 @@
                             data.usersAntigos17.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
-                                if(user.arquivo != null){
+                                if (user.arquivo != null) {
                                     userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2017/${user.arquivo}" target='_blank'> Certificado 2017</a>`;
-                                
+
                                 }
                                 results17.appendChild(userDiv);
                             });
@@ -364,9 +390,9 @@
                             data.usersAntigos18.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
-                                if(user.arquivo != null){
+                                if (user.arquivo != null) {
                                     userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2018/${user.arquivo}" target='_blank'> Certificado 2018</a>`;
-                                
+
                                 }
                                 results18.appendChild(userDiv);
                             });
