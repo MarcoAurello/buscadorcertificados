@@ -16,18 +16,18 @@ app.use((req, res, next) => {
 const config = {
   user: 'sa',
   password: 'local',
-  server: 'SQLSERVER',
+  server: '10.9.8.74',
   database: 'congressoweb',
   options: {
-    encrypt: true, // Isso permite a conexão segura
-    trustServerCertificate: true, // Isso permite confiar em certificados autoassinados
+    encrypt: true,
+    trustServerCertificate: true,
   }
 };
 
 const configAntigo = {
   user: 'sa',
   password: 'local',
-  server: 'SQLSERVER',
+  server: '10.9.8.74',
   database: 'CongressosAnteriores',
   options: {
     encrypt: true, // Isso permite a conexão segura
