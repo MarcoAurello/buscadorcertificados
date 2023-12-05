@@ -80,57 +80,57 @@
 
             border-radius: 5px;
             padding: 20px;
-
+           
         }
 
-        #results19 {
+        /* #results19 {
 
             border-radius: 5px;
             padding: 20px;
-
+           
             display: none;
-        }
+        } */
 
         #results21 {
 
             border-radius: 5px;
             padding: 20px;
-            ;
+         ;
         }
 
         #results14 {
 
             border-radius: 5px;
             padding: 20px;
-
+        
         }
 
         #results15 {
 
             border-radius: 5px;
             padding: 20px;
-
+      
         }
 
         #results16 {
 
             border-radius: 5px;
             padding: 20px;
-
+      
         }
 
         #results17 {
 
             border-radius: 5px;
             padding: 20px;
-
+          
         }
 
         #results18 {
 
             border-radius: 5px;
             padding: 20px;
-
+    
         }
 
         .user {
@@ -174,6 +174,25 @@
             </div>
         </div>
 
+
+
+        <div id="results14" class="hidden">
+
+        </div>
+
+        <div id="results15" class="hidden">
+
+        </div>
+        <div id="results16" class="hidden">
+
+        </div>
+        <div id="results17" class="hidden">
+
+        </div>
+        <div id="results18" class="hidden">
+
+        </div>
+
         <div id="results" class="hidden">
             <div id="loading"></div>
         </div>
@@ -187,25 +206,11 @@
         </div>
 
 
-        <div id="results18" class="hidden">
 
-        </div>
 
-        <div id="results17" class="hidden">
+       
 
-        </div>
-
-        <div id="results16" class="hidden">
-
-        </div>
-
-        <div id="results15" class="hidden">
-
-        </div>
-        <div id="results14" class="hidden">
-
-        </div>
-
+       
 
         <script>
             // Adicione uma variável para controlar os resultados
@@ -275,13 +280,11 @@
                         } else {
                             const yearsProcessed = {};
 
-                            data.users.sort((a, b) => parseInt(b.createdAt.substring(0, 4)) - parseInt(a.createdAt.substring(0, 4)));
-
                             data.users.forEach(user => {
                                 const year = user.createdAt.substring(0, 4);
 
                                 // Verifica se o ano já foi processado
-                                if (!yearsProcessed.includes(year)) {
+                                if (!yearsProcessed[year]) {
                                     const userDiv = document.createElement("div");
                                     userDiv.classList.add("user");
 
@@ -289,10 +292,11 @@
 
                                     results.appendChild(userDiv);
 
-                                    // Adiciona o ano ao array de anos processados
-                                    yearsProcessed.push(year);
+                                    // Marca o ano como processado
+                                    yearsProcessed[year] = true;
                                 }
                             });
+
                             verificarExistenciaDaPagina(formattedCPF);
                         }
 
