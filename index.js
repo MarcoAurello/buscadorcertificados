@@ -57,7 +57,7 @@ app.get('/usuarios', async (req, res) => {
   const usersAntigos18 = await searchUsersAntigos18(nome);
 
 
-  generateCertificate(nome)
+  // generateCertificate(nome)
 
 
   // generateCertificate(nome)
@@ -250,6 +250,11 @@ app.get('/eventos/certificado/congresso2021/:formattedCPF.pdf', (req, res) => {
   res.status(200).send('Resposta com status 200 OK');
 });
 
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Erro interno do servidor!');
+});
 
 
 
