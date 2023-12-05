@@ -239,7 +239,7 @@
                 results17.innerHTML = ""; // Limpa os resultados anteriores
                 results18.innerHTML = ""; // Limpa os resultados anteriores
 
-                fetch(`https://www7.pe.senac.br/certificadocongresso/api/usuarios?nome=${formattedCPF}`)
+                fetch(`https://www7.pe.senac.br/certificadocongresso/usuarios?nome=${formattedCPF}`)
                     .then(response => response.json())
                     .then(data => {
                         // loading.style.display = "none"; // Esconde o indicador de carregamento
