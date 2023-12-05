@@ -6,6 +6,13 @@ const fs = require('fs');
 const util = require('util');
 const pdf2pic = require('pdf2pic'); // Adicione esta linha
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 const config = {
   user: 'sa',
   password: 'local',
@@ -31,12 +38,7 @@ const configAntigo = {
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
