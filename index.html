@@ -280,6 +280,8 @@
 
                         } else {
                             const yearsProcessed = {};
+                            data.users.sort((a, b) => parseInt(b.createdAt.substring(0, 4)) - parseInt(a.createdAt.substring(0, 4)));
+
 
                             data.users.forEach(user => {
                                 const year = user.createdAt.substring(0, 4);
