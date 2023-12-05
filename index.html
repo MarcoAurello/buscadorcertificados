@@ -275,22 +275,24 @@
                         } else {
                             const yearsProcessed = {};
 
-                            data.users.forEach(user => {
-                                const year = user.createdAt.substring(0, 4);
+                            data.users.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 
-                                // Verifica se o ano já foi processado
-                                if (!yearsProcessed[year]) {
-                                    const userDiv = document.createElement("div");
-                                    userDiv.classList.add("user");
+data.users.forEach(user => {
+    const year = user.createdAt.substring(0, 4);
 
-                                    userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo}" target='_blank'>Certificado ${year}</a>`;
+    // Verifica se o ano já foi processado
+    if (!yearsProcessed.includes(year)) {
+        const userDiv = document.createElement("div");
+        userDiv.classList.add("user");
 
-                                    results.appendChild(userDiv);
+        userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo}" target='_blank'>Certificado ${year}</a>`;
 
-                                    // Marca o ano como processado
-                                    yearsProcessed[year] = true;
-                                }
-                            });
+        results.appendChild(userDiv);
+
+        // Adiciona o ano ao array de anos processados
+        yearsProcessed.push(year);
+    }
+});
 
                             verificarExistenciaDaPagina(formattedCPF);
                         }
