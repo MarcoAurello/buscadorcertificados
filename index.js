@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/certificadocongresso/usuarios', async (req, res) => {
+app.get('/usuarios', async (req, res) => {
   const nome = req.query.nome;
   console.log('Nome recebido no servidor: ' + nome);
   
