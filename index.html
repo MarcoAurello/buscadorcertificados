@@ -236,7 +236,7 @@
 
             function isValidCPF() {
                 const searchInput = document.getElementById("searchInput");
-                cpf = searchInput.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
+                cpf = searchInput.value.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
 
                 // Verifica se o CPF tem 11 dígitos
                 if (cpf.length !== 11) {
