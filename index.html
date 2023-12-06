@@ -167,7 +167,7 @@
 
         <div id='a'>
             <input type="text" id="searchInput" style="width: 200px;" placeholder="Digite um CPF">
-            <button onclick="isValidCPF(searchInput)">Buscar</button>
+            <button onclick="isValidCPF()">Buscar</button>
 
         </div>
 
@@ -232,10 +232,11 @@
                 window.location.reload();
             }
 
-            const searchInput = document.getElementById("searchInput");
+           
 
-            function isValidCPF(cpf ) {
-                cpf = cpf.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
+            function isValidCPF() {
+                const searchInput = document.getElementById("searchInput");
+                cpf = searchInput.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
 
                 // Verifica se o CPF tem 11 dígitos
                 if (cpf.length !== 11) {
@@ -260,11 +261,10 @@
                     sum = 0;
                     for (let i = 1; i <= 10; i++) {
                         sum += parseInt(cpf[i - 1]) * (12 - i);
+                        searchUsers() 
                     }
                     remainder = (sum * 10) % 11;
-                    searchUsers()
                     return remainder === 10 || remainder === parseInt(cpf[10]);
-
                 }
 
                 return false;
