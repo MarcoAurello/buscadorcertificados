@@ -240,11 +240,13 @@
 
                 // Verifica se o CPF tem 11 dígitos
                 if (cpf.length !== 11) {
+                    alert("digite um CPF válido")
                     return false;
                 }
 
                 // Verifica se todos os dígitos são iguais (ex: 000.000.000-00)
                 if (/^(\d)\1+$/.test(cpf)) {
+                    alert("digite um CPF válido")
                     return false;
                 }
 
@@ -266,6 +268,7 @@
                     remainder = (sum * 10) % 11;
                     return remainder === 10 || remainder === parseInt(cpf[10]);
                 }
+                alert("digite um CPF válido")
 
                 return false;
             }
