@@ -232,7 +232,7 @@
                 window.location.reload();
             }
 
-           
+
 
             function isValidCPF() {
                 const searchInput = document.getElementById("searchInput");
@@ -263,7 +263,7 @@
                     sum = 0;
                     for (let i = 1; i <= 10; i++) {
                         sum += parseInt(cpf[i - 1]) * (12 - i);
-                        searchUsers() 
+                        searchUsers()
                     }
                     remainder = (sum * 10) % 11;
                     return remainder === 10 || remainder === parseInt(cpf[10]);
@@ -331,7 +331,12 @@
                         // loadingOverlay.style.display = "none"
                         // createAndAppendUserDiv()
 
-                        if(!data){
+                        if (data.users.length > 0 ||
+                            data.usersAntigos.length > 0 ||
+                            data.usersAntigos15.length > 0 ||
+                            data.usersAntigos16.length > 0 ||
+                            data.usersAntigos17.length > 0 ||
+                            data.usersAntigos18.length > 0) {
                             alert('Não foi possível encontrar a sua inscrição no Congresso Internacional de Educação. Por favor entrar em contato com a central de atendimento pelo telefone 81 3413 - 6666.')
 
                         }
