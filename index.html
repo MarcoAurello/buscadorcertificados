@@ -255,8 +255,7 @@
             // Adicione uma variável para controlar os resultados
             let currentResults = [];
 
-            const overlay = document.getElementById("overlay");
-
+           
             function refreshPage() {
                 // Executa a função de refresh ao clicar no botão
                 window.location.reload();
@@ -306,9 +305,10 @@
 
 
 
-
+            const overlay = document.getElementById("overlay");
 
             function searchUsers() {
+                
                 overlay.style.display = "block";
 
                 const a = document.getElementById("a");
