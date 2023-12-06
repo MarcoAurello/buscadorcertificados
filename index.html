@@ -227,6 +227,11 @@
             // Adicione uma variável para controlar os resultados
             let currentResults = [];
 
+            function refreshPage() {
+                    // Executa a função de refresh ao clicar no botão
+                    window.location.reload();
+                }
+
             function searchUsers() {
                 const searchInput = document.getElementById("searchInput");
                 const a = document.getElementById("a");
@@ -242,10 +247,7 @@
                     b.style.display = "block";
                 }
 
-                function refreshPage() {
-                    // Executa a função de refresh ao clicar no botão
-                    window.location.reload();
-                }
+               
 
                 const overlay = document.getElementById("overlay");
                 const loading = document.getElementById("loading");
