@@ -331,10 +331,16 @@
                         // loadingOverlay.style.display = "none"
                         // createAndAppendUserDiv()
 
+                        if(!data){
+                            alert('Não foi possível encontrar a sua inscrição no Congresso Internacional de Educação. Por favor entrar em contato com a central de atendimento pelo telefone 81 3413 - 6666.')
+
+                        }
+
 
 
 
                         currentResults = data; // Armazena os resultados atuais
+
 
                         if (data.users.length === 0) {
                             results.innerHTML = " ";
