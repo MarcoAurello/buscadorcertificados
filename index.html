@@ -145,6 +145,11 @@
             display: block;
             /* ou display: inline-block; ou display: inline; conforme necessário */
         }
+
+        #b {
+            display: none;
+            /* ou display: inline-block; ou display: inline; conforme necessário */
+        }
     </style>
 </head>
 
@@ -163,6 +168,12 @@
         <div id='a'>
             <input type="text" id="searchInput" style="width: 200px;" placeholder="Digite um CPF">
             <button onclick="searchUsers()">Buscar</button>
+
+        </div>
+
+        <div id='b'>
+            
+            <button  a href="https://www7.pe.senac.br/certificadocongresso/">nova consulta</button>
 
         </div>
 
@@ -228,6 +239,7 @@
 
                 if (formattedCPF) {
                     a.style.display = "none";
+                    b.style.display = "block";
                 }
 
                 const overlay = document.getElementById("overlay");
