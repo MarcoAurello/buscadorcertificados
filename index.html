@@ -167,7 +167,7 @@
 
         <div id='a'>
             <input type="text" id="searchInput" style="width: 200px;" placeholder="Digite um CPF">
-            <button onclick="searchUsers()">Buscar</button>
+            <button onclick="isValidCPF(searchInput)">Buscar</button>
 
         </div>
 
@@ -228,12 +228,55 @@
             let currentResults = [];
 
             function refreshPage() {
-                    // Executa a função de refresh ao clicar no botão
-                    window.location.reload();
+                // Executa a função de refresh ao clicar no botão
+                window.location.reload();
+            }
+
+            const searchInput = document.getElementById("searchInput");
+
+            function isValidCPF(cpf ) {
+                cpf = cpf.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
+
+                // Verifica se o CPF tem 11 dígitos
+                if (cpf.length !== 11) {
+                    return false;
                 }
 
+                // Verifica se todos os dígitos são iguais (ex: 000.000.000-00)
+                if (/^(\d)\1+$/.test(cpf)) {
+                    return false;
+                }
+
+                // Validação dos dígitos verificadores
+                let sum = 0;
+                let remainder;
+
+                for (let i = 1; i <= 9; i++) {
+                    sum += parseInt(cpf[i - 1]) * (11 - i);
+                }
+
+                remainder = (sum * 10) % 11;
+                if (remainder === 10 || remainder === parseInt(cpf[9])) {
+                    sum = 0;
+                    for (let i = 1; i <= 10; i++) {
+                        sum += parseInt(cpf[i - 1]) * (12 - i);
+                    }
+                    remainder = (sum * 10) % 11;
+                    searchUsers()
+                    return remainder === 10 || remainder === parseInt(cpf[10]);
+
+                }
+
+                return false;
+            }
+
+
+
+
+
+
             function searchUsers() {
-                const searchInput = document.getElementById("searchInput");
+
                 const a = document.getElementById("a");
                 const formattedCPF = searchInput.value.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
 
@@ -247,7 +290,7 @@
                     b.style.display = "block";
                 }
 
-               
+
 
                 const overlay = document.getElementById("overlay");
                 const loading = document.getElementById("loading");
