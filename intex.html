@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
-        #loading {
+        /* #loading {
             display: none;
             margin: 20px auto;
             border: 4px solid rgba(255, 255, 255, 0.3);
@@ -28,7 +28,7 @@
             width: 30px;
             height: 30px;
             animation: spin 2s linear infinite;
-        }
+        } */
 
         @keyframes spin {
             0% {
@@ -38,6 +38,28 @@
             100% {
                 transform: rotate(360deg);
             }
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 1000;
+        }
+
+        #loading1 {
+            display: block;
+            margin: 20% auto;
+            border: 4px solid rgba(0, 123, 255, 0.3);
+            border-top: 4px solid #007BFF;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
         }
 
         body {
@@ -80,40 +102,57 @@
 
             border-radius: 5px;
             padding: 20px;
-            margin-left: 40px;
-            margin-right: 40px;
+            margin-bottom: 40px;
+
+
         }
 
-        #results19 {
+        /* #results19 {
 
             border-radius: 5px;
             padding: 20px;
-            margin-left: 40px;
-            margin-right: 40px;
-        }
+           
+            display: none;
+        } */
 
         #results21 {
 
             border-radius: 5px;
-            padding: 20px;
-            margin-left: 40px;
-            margin-right: 40px;
+
+
         }
 
         #results14 {
 
             border-radius: 5px;
-            padding: 20px;
-            margin-left: 40px;
-            margin-right: 40px;
+
         }
 
         #results15 {
 
             border-radius: 5px;
-            padding: 20px;
-            margin-left: 40px;
-            margin-right: 40px;
+
+
+        }
+
+        #results16 {
+
+            border-radius: 5px;
+
+        }
+
+        #results17 {
+
+            border-radius: 5px;
+
+
+        }
+
+        #results18 {
+
+            border-radius: 5px;
+
+
         }
 
         .user {
@@ -122,10 +161,6 @@
             padding: 10px;
             margin: 10px 0;
             background-color: #f9f9f9;
-        }
-
-        img {
-            width: 200px;
         }
 
         #a {
@@ -137,14 +172,21 @@
             display: none;
             /* ou display: inline-block; ou display: inline; conforme necessário */
         }
+
+        img{
+            width: 50px;
+            height: 50px;
+        }
     </style>
 </head>
 
 <body>
+    <img src="/senac.png"  style="width: 50px;">
     <div>
-        <img src="senac.png" alt="Senac Logo">
+       
 
-        <h1>Buscador de Certificados<br> Congresso e Summit- Senac-PE</h1>
+
+        <h1> Buscador de Certificados <br>Congresso e Summit</h1>
 
 
         <!--  <a href="https://intranet.pe.senac.br/dr/congresso/certificadoanosanteriores.aspx">
@@ -153,39 +195,43 @@
     </div> -->
         <hr>
 
-
         <div id='a'>
-            <input type="text" id="searchInput" style="width: 200px;" placeholder="Digite um CPF">
-            <button onclick="searchUsers()">Digite o CPF</button>
-
+            <input type="text" id="searchInput" style="width: 200px;" placeholder="Digite seu CPF">
+            <button onclick="isValidCPF()">Buscar</button>
 
         </div>
-
-       
 
         <div id='b'>
-            <button 
-        
-         onclick="handleRefresh()">
-            Nova Busca
-        </button>
+
+            <button onclick="refreshPage()">nova consulta</button>
 
         </div>
-
-        
 
         <br>
 
-
-
-
-
         <div id="overlay" class="hidden">
-            
 
-            <div id="loading-overlay">
-                <div id="loading"></div>
-            </div>
+            <div id="loading1"></div>
+
+        </div>
+
+
+
+        <div id="results14" class="hidden">
+
+        </div>
+
+        <div id="results15" class="hidden">
+
+        </div>
+        <div id="results16" class="hidden">
+
+        </div>
+        <div id="results17" class="hidden">
+
+        </div>
+        <div id="results18" class="hidden">
+
         </div>
 
         <div id="results" class="hidden">
@@ -201,49 +247,77 @@
         </div>
 
 
-        <div id="results18" class="hidden">
 
-        </div>
 
-        <div id="results17" class="hidden">
 
-        </div>
 
-        <div id="results16" class="hidden">
 
-        </div>
 
-        <div id="results15" class="hidden">
 
-        </div>
-        <div id="results14" class="hidden">
-
-        </div>
 
 
         <script>
             // Adicione uma variável para controlar os resultados
             let currentResults = [];
+            const overlay = document.getElementById("overlay");
 
-            const buttonStyle = {
-                padding: '10px 20px',
-                fontSize: '16px',
-                color: '#fff',
-                backgroundColor: '#007bff',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
-                transition: 'background-color 0.3s ease',
-            };
 
-            const handleRefresh = () => {
-                // Recarrega a página
+            function refreshPage() {
+                // Executa a função de refresh ao clicar no botão
                 window.location.reload();
-            };
+            }
+
+
+
+            function isValidCPF() {
+                const searchInput = document.getElementById("searchInput");
+                cpf = searchInput.value.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
+
+                // Verifica se o CPF tem 11 dígitos
+                if (cpf.length !== 11) {
+                    alert("digite um CPF válido")
+                    return false;
+                }
+
+                // Verifica se todos os dígitos são iguais (ex: 000.000.000-00)
+                if (/^(\d)\1+$/.test(cpf)) {
+                    alert("digite um CPF válido")
+                    return false;
+                }
+
+                // Validação dos dígitos verificadores
+                let sum = 0;
+                let remainder;
+
+                for (let i = 1; i <= 9; i++) {
+                    sum += parseInt(cpf[i - 1]) * (11 - i);
+                }
+
+                remainder = (sum * 10) % 11;
+                if (remainder === 10 || remainder === parseInt(cpf[9])) {
+                    sum = 0;
+                    for (let i = 1; i <= 10; i++) {
+                        sum += parseInt(cpf[i - 1]) * (12 - i);
+                        searchUsers()
+                    }
+                    remainder = (sum * 10) % 11;
+                    return remainder === 10 || remainder === parseInt(cpf[10]);
+                }
+                alert("digite um CPF válido")
+
+                return false;
+            }
+
+
+
+
 
 
             function searchUsers() {
-                const searchInput = document.getElementById("searchInput");
+
+
+                overlay.style.display = "block";
+
                 const a = document.getElementById("a");
                 const formattedCPF = searchInput.value.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
 
@@ -254,28 +328,26 @@
 
                 if (formattedCPF) {
                     a.style.display = "none";
-                    b.style.display= 'block'
+                    b.style.display = "block";
                 }
 
-                const overlay = document.getElementById("overlay");
+
+
+
                 const loading = document.getElementById("loading");
                 const loadingOverlay = document.getElementById("loading-overlay");
                 const loading2 = document.getElementById("loading2");
-
                 const results = document.getElementById("results");
                 const results19 = document.getElementById("results19");
-
                 const results21 = document.getElementById("results21");
-
                 const results14 = document.getElementById("results14");
                 const results15 = document.getElementById("results15");
                 const results16 = document.getElementById("results16");
                 const results17 = document.getElementById("results17");
                 const results18 = document.getElementById("results18");
-
                 overlay.classList.remove("hidden"); // Mostra o overlay para bloquear a tela
                 loading.style.display = "block"; // Mostra o indicador de carregamento
-                loadingOverlay.style.display = "block";
+
 
 
                 loading.style.display = "block"; // Mostra o indicador de carregamento
@@ -290,19 +362,27 @@
                 results17.innerHTML = ""; // Limpa os resultados anteriores
                 results18.innerHTML = ""; // Limpa os resultados anteriores
 
-
-
-                fetch(`/usuarios?nome=${formattedCPF}`)
+                fetch(`https://www7.pe.senac.br/certificadocongresso/usuarios?nome=${formattedCPF}`)
                     .then(response => response.json())
                     .then(data => {
                         // loading.style.display = "none"; // Esconde o indicador de carregamento
                         // loadingOverlay.style.display = "none"
-                        createAndAppendUserDiv()
+                        // createAndAppendUserDiv()
+
+                        overlay.style.display = "none";
+                        const allArraysEmpty = Object.values(data).every(array => array.length === 0);
+
+
+                        if (allArraysEmpty) {
+                            alert('Não foi possível encontrar a sua inscrição no Congresso Internacional de Educação. Por favor entrar em contato com a central de atendimento pelo telefone 81 3413 - 6666.')
+
+                        }
 
 
 
 
                         currentResults = data; // Armazena os resultados atuais
+
 
                         if (data.users.length === 0) {
                             results.innerHTML = " ";
@@ -311,12 +391,23 @@
 
 
                         } else {
+                            const yearsProcessed = {};
+
                             data.users.forEach(user => {
-                                const userDiv = document.createElement("div");
-                                userDiv.classList.add("user");
-                                userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo}" target='_blank'>Certificado ${user.createdAt.substring(0, 4)}</a>`;
-                                // userDiv.innerHTML = `<a href="certificado.png" target='_blank'>Certificado ${'2019'} - ${user.nome}</a>`;
-                                results.appendChild(userDiv);
+                                const year = user.createdAt.substring(0, 4);
+
+                                // Verifica se o ano já foi processado
+                                if (!yearsProcessed[year]) {
+                                    const userDiv = document.createElement("div");
+                                    userDiv.classList.add("user");
+
+                                    userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo}" target='_blank'>Certificado ${year}</a>`;
+
+                                    results.appendChild(userDiv);
+
+                                    // Marca o ano como processado
+                                    yearsProcessed[year] = true;
+                                }
                             });
 
                             verificarExistenciaDaPagina(formattedCPF);
@@ -445,7 +536,7 @@
                                 fetch(`https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf`, { mode: 'no-cors' })
                                     .then(response => {
                                         if (!response.ok) {
-                                            alert('Ocorreu um erro na requisição: HTTP error! status: ' + response.status);
+                                            // alert('Ocorreu um erro na requisição: HTTP error! status: ' + response.status);
                                             throw new Error(`HTTP error! status: ${response.status}`);
                                         }
                                         return response;
@@ -460,7 +551,7 @@
                                     })
                                     .catch(error => {
                                         // Tratar erros de requisição
-                                        alert('Ocorreu um erro na requisição: ' + error.message);
+                                        // alert('Ocorreu um erro na requisição: ' + error.message);
                                     });
                             } else {
                                 alert('Você está offline. Verifique sua conexão de rede.');
@@ -475,6 +566,7 @@
                         loading.style.display = "none"; // Certifique-se de esconder o indicador em caso de erro
                         loading2.style.display = "none";
                         loadingOverlay.style.display = "none";
+                        overlay.style.display = "none";
                     });
             }
 

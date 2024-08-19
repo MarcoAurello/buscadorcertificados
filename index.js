@@ -3,6 +3,7 @@ const sql = require('mssql');
 const app = express();
 const puppeteer = require('puppeteer');
 const fs = require('fs');
+const path = require('path');
 const util = require('util');
 const pdf2pic = require('pdf2pic'); // Adicione esta linha
 
@@ -40,8 +41,15 @@ app.use(express.json());
 
 
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Rota para servir o index.html da raiz
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/teste-imagem', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'senac.png'));
 });
 
 app.get('/usuarios', async (req, res) => {
