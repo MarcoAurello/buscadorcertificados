@@ -144,7 +144,7 @@
     <div>
         <img src="senac.png" alt="Senac Logo">
 
-        <h1>Buscador de Certificados<br> Congresso e Summit- Senac-PE</h1>
+        <h1>Buscador de Certificados<br> Congresso e Summit - Senac-PE</h1>
 
 
         <!--  <a href="https://intranet.pe.senac.br/dr/congresso/certificadoanosanteriores.aspx">
@@ -445,7 +445,7 @@
                                 fetch(`https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf`, { mode: 'no-cors' })
                                     .then(response => {
                                         if (!response.ok) {
-                                            alert('Ocorreu um erro na requisição: HTTP error! status: ' + response.status);
+                                            // alert('Ocorreu um erro na requisição: HTTP error! status: ' + response.status);
                                             throw new Error(`HTTP error! status: ${response.status}`);
                                         }
                                         return response;
@@ -460,7 +460,8 @@
                                     })
                                     .catch(error => {
                                         // Tratar erros de requisição
-                                        alert('Ocorreu um erro na requisição: ' + error.message);
+                                       
+                                       // alert('Ocorreu um erro na requisição: ' + error.message);
                                     });
                             } else {
                                 alert('Você está offline. Verifique sua conexão de rede.');
