@@ -253,7 +253,7 @@ app.get('/certificado.pdf', (req, res) => {
   res.sendFile('certificado.pdf', { root: __dirname });
 });
 
-app.get('/eventos/certificado/congresso2021/:formattedCPF.pdf', (req, res) => {
+app.get('www7.pe.senac.br/eventos/certificadocongresso/certificado/congresso2021/:formattedCPF.pdf', (req, res) => {
   // Simula uma resposta com status 200 OK
   res.status(200).send('Resposta com status 200 OK');
 });
