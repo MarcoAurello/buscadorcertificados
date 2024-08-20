@@ -123,55 +123,33 @@
             margin: 10px 0;
             background-color: #f9f9f9;
         }
-
-        img {
-            width: 200px;
-        }
-
         #a {
-            display: block;
-            /* ou display: inline-block; ou display: inline; conforme necessário */
-        }
-
-        #b {
-            display: none;
-            /* ou display: inline-block; ou display: inline; conforme necessário */
+            display: block; /* ou display: inline-block; ou display: inline; conforme necessário */
         }
     </style>
 </head>
 
 <body>
     <div>
-        <!-- <img src="senac.png" alt="Senac Logo"> -->
-
-        <h1>Buscador de Certificados<br> Congresso e Summit - Senac-PE</h1>
-
+       
+        <h1>Buscador de Certificados <br>Congresso Internacional de Tecnologia na Educação Senac PE</h1>
+        2014 a 2023
 
         <!--  <a href="https://intranet.pe.senac.br/dr/congresso/certificadoanosanteriores.aspx">
             <button>Certificados 2014 a 2018</button>
         </a>
     </div> -->
         <hr>
+        
 
-
-        <div id='a'>
+        <div id ='a'>
             <input type="text" id="searchInput" style="width: 200px;" placeholder="Digite um CPF">
-            <button onclick="searchUsers()">Digite o CPF</button>
+        <button onclick="searchUsers()">Digite o CPF</button>
 
 
         </div>
-
-
-
-        <div id='b'>
-            <button onclick="handleRefresh()">
-                Nova Busca
-            </button>
-
-        </div>
-
-
-
+        
+        
         <br>
 
 
@@ -179,8 +157,6 @@
 
 
         <div id="overlay" class="hidden">
-
-
             <div id="loading-overlay">
                 <div id="loading"></div>
             </div>
@@ -206,7 +182,7 @@
         <div id="results17" class="hidden">
 
         </div>
-
+        
         <div id="results16" class="hidden">
 
         </div>
@@ -223,23 +199,6 @@
             // Adicione uma variável para controlar os resultados
             let currentResults = [];
 
-            const buttonStyle = {
-                padding: '10px 20px',
-                fontSize: '16px',
-                color: '#fff',
-                backgroundColor: '#007bff',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
-                transition: 'background-color 0.3s ease',
-            };
-
-            const handleRefresh = () => {
-                // Recarrega a página
-                window.location.reload();
-            };
-
-
             function searchUsers() {
                 const searchInput = document.getElementById("searchInput");
                 const a = document.getElementById("a");
@@ -251,9 +210,8 @@
                 }
 
                 if (formattedCPF) {
-                    a.style.display = "none";
-                    b.style.display = 'block'
-                }
+            a.style.display = "none";
+        }
 
                 const overlay = document.getElementById("overlay");
                 const loading = document.getElementById("loading");
@@ -288,24 +246,14 @@
                 results17.innerHTML = ""; // Limpa os resultados anteriores
                 results18.innerHTML = ""; // Limpa os resultados anteriores
 
-
-
                 fetch(`/usuarios?nome=${formattedCPF}`)
-                    .then(response => {
-                        if (response.ok && response.headers.get('Content-Type').includes('application/json')) {
-                            return response.json();
-                        } else {
-                            return response.text().then(text => {
-                                throw new Error(`Expected JSON, but got HTML. Response: ${text}`);
-                            });
-                        }
-                    })
+                    .then(response => response.json())
                     .then(data => {
                         // loading.style.display = "none"; // Esconde o indicador de carregamento
                         // loadingOverlay.style.display = "none"
                         createAndAppendUserDiv()
 
-
+                        
 
 
                         currentResults = data; // Armazena os resultados atuais
@@ -320,7 +268,7 @@
                             data.users.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
-                                userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo ?user.arquivo:''}" target='_blank'>Certificado ${user.createdAt.substring(0, 4)}</a>`;
+                                userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo}" target='_blank'>Certificado ${user.createdAt.substring(0, 4)}</a>`;
                                 // userDiv.innerHTML = `<a href="certificado.png" target='_blank'>Certificado ${'2019'} - ${user.nome}</a>`;
                                 results.appendChild(userDiv);
                             });
@@ -335,20 +283,20 @@
 
 
                         } else {
-
+                       
 
                             data.usersAntigos.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
-                                if (user.arquivo != null) {
+                                if(user.arquivo != null){
                                     userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2014/${user.arquivo}" target='_blank'> Certificado 2014 </a>`;
 
                                 }
-
+                                
                                 results14.appendChild(userDiv);
                             });
                         }
-
+                       
 
                         if (data.usersAntigos15.length === 0) {
                             results15.innerHTML = " ";
@@ -361,11 +309,11 @@
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
 
-                                if (user.arquivo != null) {
+                                if(user.arquivo != null){
                                     userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2015/${user.arquivo}" target='_blank'> Certificado 2015</a>`;
-
+                                
                                 }
-
+                             
                                 results15.appendChild(userDiv);
                             });
 
@@ -382,9 +330,9 @@
                             data.usersAntigos16.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
-                                if (user.arquivo != null) {
+                                if(user.arquivo != null){
                                     userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2016/${user.arquivo}" target='_blank'> Certificado 2016</a>`;
-
+                                
                                 }
                                 results16.appendChild(userDiv);
                             });
@@ -402,9 +350,9 @@
                             data.usersAntigos17.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
-                                if (user.arquivo != null) {
+                                if(user.arquivo != null){
                                     userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2017/${user.arquivo}" target='_blank'> Certificado 2017</a>`;
-
+                                
                                 }
                                 results17.appendChild(userDiv);
                             });
@@ -423,9 +371,9 @@
                             data.usersAntigos18.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
-                                if (user.arquivo != null) {
+                                if(user.arquivo != null){
                                     userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2018/${user.arquivo}" target='_blank'> Certificado 2018</a>`;
-
+                                
                                 }
                                 results18.appendChild(userDiv);
                             });
@@ -466,7 +414,6 @@
                                     })
                                     .catch(error => {
                                         // Tratar erros de requisição
-
                                         // alert('Ocorreu um erro na requisição: ' + error.message);
                                     });
                             } else {

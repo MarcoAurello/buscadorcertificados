@@ -3,32 +3,24 @@ const sql = require('mssql');
 const app = express();
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-const path = require('path');
 const util = require('util');
 const pdf2pic = require('pdf2pic'); // Adicione esta linha
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 const config = {
   user: 'sa',
   password: 'local',
-  server: '10.9.8.74',
+  server: 'SQLSERVER',
   database: 'congressoweb',
   options: {
-    encrypt: true,
-    trustServerCertificate: true,
+    encrypt: true, // Isso permite a conexão segura
+    trustServerCertificate: true, // Isso permite confiar em certificados autoassinados
   }
 };
 
 const configAntigo = {
   user: 'sa',
   password: 'local',
-  server: '10.9.8.74',
+  server: 'SQLSERVER',
   database: 'CongressosAnteriores',
   options: {
     encrypt: true, // Isso permite a conexão segura
@@ -39,18 +31,9 @@ const configAntigo = {
 
 app.use(express.json());
 
-
-
-// app.use(express.static(path.join(__dirname, 'public')));
-
-// Rota para servir o index.html da raiz
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(__dirname + '/index.html');
 });
-
-// app.get('/teste-imagem', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'public', 'senac.png'));
-// });
 
 app.get('/usuarios', async (req, res) => {
   const nome = req.query.nome;
@@ -65,7 +48,7 @@ app.get('/usuarios', async (req, res) => {
   const usersAntigos18 = await searchUsersAntigos18(nome);
 
 
-  // generateCertificate(nome)
+  generateCertificate(nome)
 
 
   // generateCertificate(nome)
@@ -253,16 +236,11 @@ app.get('/certificado.pdf', (req, res) => {
   res.sendFile('certificado.pdf', { root: __dirname });
 });
 
-app.get('www7.pe.senac.br/eventos/certificadocongresso/certificado/congresso2021/:formattedCPF.pdf', (req, res) => {
+app.get('/eventos/certificado/congresso2021/:formattedCPF.pdf', (req, res) => {
   // Simula uma resposta com status 200 OK
   res.status(200).send('Resposta com status 200 OK');
 });
 
-
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Erro interno do servidor!');
-});
 
 
 
@@ -287,7 +265,7 @@ app.use((err, req, res, next) => {
 
 
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Servidor está ouvindo na porta ${PORT}`);
