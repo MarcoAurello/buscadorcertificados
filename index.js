@@ -41,16 +41,16 @@ app.use(express.json());
 
 
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // Rota para servir o index.html da raiz
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/teste-imagem', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'senac.png'));
-});
+// app.get('/teste-imagem', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'senac.png'));
+// });
 
 app.get('/usuarios', async (req, res) => {
   const nome = req.query.nome;
