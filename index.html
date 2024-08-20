@@ -161,18 +161,16 @@
 
         </div>
 
-       
+
 
         <div id='b'>
-            <button 
-        
-         onclick="handleRefresh()">
-            Nova Busca
-        </button>
+            <button onclick="handleRefresh()">
+                Nova Busca
+            </button>
 
         </div>
 
-        
+
 
         <br>
 
@@ -181,7 +179,7 @@
 
 
         <div id="overlay" class="hidden">
-            
+
 
             <div id="loading-overlay">
                 <div id="loading"></div>
@@ -254,7 +252,7 @@
 
                 if (formattedCPF) {
                     a.style.display = "none";
-                    b.style.display= 'block'
+                    b.style.display = 'block'
                 }
 
                 const overlay = document.getElementById("overlay");
@@ -293,7 +291,15 @@
 
 
                 fetch(`/usuarios?nome=${formattedCPF}`)
-                    .then(response => response.json())
+                    .then(response => {
+                        if (response.ok && response.headers.get('Content-Type').includes('application/json')) {
+                            return response.json();
+                        } else {
+                            return response.text().then(text => {
+                                throw new Error(`Expected JSON, but got HTML. Response: ${text}`);
+                            });
+                        }
+                    })
                     .then(data => {
                         // loading.style.display = "none"; // Esconde o indicador de carregamento
                         // loadingOverlay.style.display = "none"
@@ -460,8 +466,8 @@
                                     })
                                     .catch(error => {
                                         // Tratar erros de requisição
-                                       
-                                       // alert('Ocorreu um erro na requisição: ' + error.message);
+
+                                        // alert('Ocorreu um erro na requisição: ' + error.message);
                                     });
                             } else {
                                 alert('Você está offline. Verifique sua conexão de rede.');
