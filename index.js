@@ -104,7 +104,7 @@ async function generateCertificate(cpf) {
 async function searchUsers(nome) {
   try {
     await sql.connect(config);
-    const result = await sql.query`SELECT c.arquivo, p.nome, c.createdAt
+    const result = await sql.query`SELECT DISTINCT c.arquivo, p.nome, c.createdAt
 FROM certificado c
 INNER JOIN pessoa p ON c.nome = p.nome
 WHERE p.cpf =  ${nome}`;
