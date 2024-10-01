@@ -10,7 +10,7 @@ const cors = require('cors');
 const config = {
   user: 'sa',
   password: 'local',
-  server: 'SQLSERVER',
+  server: '10.9.8.74',
   database: 'congressoweb',
   options: {
     encrypt: true, // Isso permite a conexão segura
@@ -21,7 +21,7 @@ const config = {
 const configAntigo = {
   user: 'sa',
   password: 'local',
-  server: 'SQLSERVER',
+  server: '10.9.8.74',
   database: 'CongressosAnteriores',
   options: {
     encrypt: true, // Isso permite a conexão segura
