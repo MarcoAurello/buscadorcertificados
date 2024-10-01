@@ -248,9 +248,10 @@
                 results17.innerHTML = ""; // Limpa os resultados anteriores
                 results18.innerHTML = ""; // Limpa os resultados anteriores
 
-                fetch(`/usuarios?nome=${formattedCPF}`)
+                fetch(`https://www7.pe.senac.br/certificadocongresso/usuarios?nome=${formattedCPF}`)
                     .then(response => response.json())
                     .then(data => {
+                        alert(JSON.stringify(data));
                         // loading.style.display = "none"; // Esconde o indicador de carregamento
                         // loadingOverlay.style.display = "none"
                         createAndAppendUserDiv()

@@ -5,6 +5,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const util = require('util');
 const pdf2pic = require('pdf2pic'); // Adicione esta linha
+const cors = require('cors');
 
 const config = {
   user: 'sa',
@@ -30,6 +31,7 @@ const configAntigo = {
 
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
