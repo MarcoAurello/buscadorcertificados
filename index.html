@@ -303,6 +303,7 @@ data.users.sort((a, b) => {
 });
 
 data.users.forEach(user => {
+
     const userDiv = document.createElement("div");
     userDiv.classList.add("user");
 
@@ -313,7 +314,7 @@ data.users.forEach(user => {
     // Definir o nome baseado no mês (personalize conforme necessário)
     let certificateName;
 
-    if (month === '08') {
+    if (month != '09') {
         certificateName = `Summit ${year}`;
     }  else {
         certificateName = `Certificado ${year}`; // Default para outros meses, se necessário
