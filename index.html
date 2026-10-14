@@ -314,11 +314,13 @@ data.users.forEach(user => {
     // Definir o nome baseado no mês (personalize conforme necessário)
     let certificateName;
 
-    if (month != '09') {
-        certificateName = `Summit ${year}`;
-    }  else {
-        certificateName = `Certificado ${year}`; // Default para outros meses, se necessário
-    }
+    // if (month != '09') {
+    //     certificateName = `Summit ${year}`;
+    // }  else {
+    //     certificateName = `${year}`; // Default para outros meses, se necessário
+    // }
+
+    certificateName = `${year}`
 
     // Gerar o HTML dinamicamente com o nome correto
     userDiv.innerHTML = `<a href="https://www7.pe.senac.br/congressomobile/api/certificado/${user.arquivo}" target='_blank'>${certificateName}</a>`;
@@ -343,7 +345,7 @@ data.users.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
                                 if (user.arquivo != null) {
-                                    userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2014/${user.arquivo}" target='_blank'> Certificado 2014</a>`;
+                                    userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2014/${user.arquivo}" target='_blank'> 2014</a>`;
 
                                 }
 
@@ -364,7 +366,7 @@ data.users.forEach(user => {
                                 userDiv.classList.add("user");
 
                                 if (user.arquivo != null) {
-                                    userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2015/${user.arquivo}" target='_blank'> Certificado 2015</a>`;
+                                    userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2015/${user.arquivo}" target='_blank'> 2015</a>`;
 
                                 }
 
@@ -385,7 +387,7 @@ data.users.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
                                 if (user.arquivo != null) {
-                                    userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2016/${user.arquivo}" target='_blank'> Certificado 2016</a>`;
+                                    userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2016/${user.arquivo}" target='_blank'> 2016</a>`;
 
                                 }
                                 results16.appendChild(userDiv);
@@ -405,7 +407,7 @@ data.users.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
                                 if (user.arquivo != null) {
-                                    userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2017/${user.arquivo}" target='_blank'>  Certificado 2017</a>`;
+                                    userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2017/${user.arquivo}" target='_blank'>  2017</a>`;
 
                                 }
                                 results17.appendChild(userDiv);
@@ -426,7 +428,7 @@ data.users.forEach(user => {
                                 const userDiv = document.createElement("div");
                                 userDiv.classList.add("user");
                                 if (user.arquivo != null) {
-                                    userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2018/${user.arquivo}" target='_blank'> Certificado 2018</a>`;
+                                    userDiv.innerHTML = `<a href="https://intranet.pe.senac.br/dr/congressosanteriores/2018/${user.arquivo}" target='_blank'> 2018</a>`;
 
                                 }
                                 results18.appendChild(userDiv);
@@ -459,7 +461,7 @@ data.users.forEach(user => {
                                         // A página existe (status 200 OK)
                                         const userDiv = document.createElement("div");
                                         userDiv.classList.add("user");
-                                        userDiv.innerHTML = `<a href="https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf" target="_blank">Certificado 2021</a>`;
+                                        userDiv.innerHTML = `<a href="https://www6.pe.senac.br/evento/certificado/congresso2021/${formattedCPF}.pdf" target="_blank">2021</a>`;
                                         results21.appendChild(userDiv);
                                     })
                                     .catch(error => {
